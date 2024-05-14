@@ -17,3 +17,6 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+Route::get('/news/{news:slug}',[NewsController::class, 'show'])->name('news.show');

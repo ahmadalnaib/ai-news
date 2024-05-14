@@ -6,9 +6,7 @@ use App\Models\Tag;
 use App\Models\News;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+
 
 class NewsController extends Controller
 {
@@ -46,6 +44,13 @@ class NewsController extends Controller
                 ->get();
     
             return view('news.index', compact('news', 'tags'));
+        }
+
+
+
+        public function show(News $news, Request $request)
+        {
+            return view('news.show', compact('news'));
         }
 
            

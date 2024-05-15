@@ -19,8 +19,8 @@
                     <x-nav-link :href="route('admin.news.index')" :active="request()->routeIs('news.index')">
                         {{ __('الاخبار') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin.news.create')" :active="request()->routeIs('news.create')">
-                        {{ __('انشاء خبر جديد') }}
+                    <x-nav-link :href="route('admin.tags.index')" :active="request()->routeIs('news.create')">
+                        {{ __('  العلامات') }}
                     </x-nav-link>
                 </div>
             </div>

@@ -84,6 +84,10 @@ class NewsAdminController extends Controller
             'description' => 'required',
          
         ]);
+         // If the title has changed, update the slug as well
+    if ($request->has('title') && $request->title !== $news->title) {
+        $validatedData['slug'] = Str::slug($request->title) . '-' . rand(1000, 9999);
+    }
     
         if ($request->hasFile('image')) {
             $validatedData['image'] = Storage::disk('public')->put('news', $request->file('image'));
@@ -112,6 +116,7 @@ class NewsAdminController extends Controller
                     'slug' => Str::slug(trim($requestTag))
                 ], [
                     'name' => ucwords(trim($requestTag))
+                    
                 ]);
     
                 $tag->news()->attach($news->id);
@@ -132,6 +137,9 @@ class NewsAdminController extends Controller
     
         // Delete the image from the storage
     Storage::delete('public/news/' . $news->image);
+
+      // Detach all related tags before deleting the news
+      $news->tags()->detach();
 
     // Delete the news
     $news->delete();

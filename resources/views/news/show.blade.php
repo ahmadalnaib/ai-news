@@ -18,7 +18,7 @@
                     </div>
                     <div class="w-full md:w-1/4 pr-4">
                         <img
-                            src="/storage/news/{{ $news->image }}"
+                            src="/storage/{{ $news->image }}"
                             alt=" logo"
                             class="max-w-full mb-4"
                         >

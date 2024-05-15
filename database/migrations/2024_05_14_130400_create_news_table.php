@@ -19,8 +19,8 @@ return new class extends Migration
             $table->text('description');
             $table->string('location');
             $table->string('image')->nullable();
-            $table->string('is_highlighted')->default('false');
-            $table->string('is_published')->default('false');
+            $table->boolean('is_highlighted')->default(false);
+            $table->boolean('is_published')->default(false);
             $table->string('link')->nullable();
             $table->timestamps();
         });

@@ -21,7 +21,7 @@
             <div class="">
                 {{ $slot }}
             </div>
-            <x-footer></x-footer>
         </div>
+        <x-footer></x-footer>
     </body>
 </html>

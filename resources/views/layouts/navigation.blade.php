@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('news.index') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                    
@@ -14,10 +14,13 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('الرئيسية') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('news.create')" :active="request()->routeIs('news.create')">
-                        {{ __('Create News') }}
+                    <x-nav-link :href="route('admin.news.index')" :active="request()->routeIs('news.index')">
+                        {{ __('الاخبار') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.news.create')" :active="request()->routeIs('news.create')">
+                        {{ __('انشاء خبر جديد') }}
                     </x-nav-link>
                 </div>
             </div>

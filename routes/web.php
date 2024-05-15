@@ -23,8 +23,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/admin/news/create', [NewsAdminController::class, 'create'])->name('news.create')->middleware('auth');
-    Route::post('/admin/news', [NewsAdminController::class, 'store'])->name('news.store')->middleware('auth');
+    Route::get('/admin/news/', [NewsAdminController::class, 'index'])->name('admin.news.index')->middleware('auth');
+    Route::get('/admin/news/create', [NewsAdminController::class, 'create'])->name('admin.news.create')->middleware('auth');
+    Route::post('/admin/news', [NewsAdminController::class, 'store'])->name('admin.news.store')->middleware('auth');
+    Route::get('/admin/news/{news:slug}/edit', [NewsAdminController::class, 'edit'])->name('admin.news.edit')->middleware('auth');
+    Route::put('/admin/news/{news:slug}/update', [NewsAdminController::class, 'update'])->name('admin.news.update')->middleware('auth');
+    Route::delete('/admin/news/{news:slug}/delete', [NewsAdminController::class, 'destroy'])->name('admin.news.destroy')->middleware('auth');
 });
 
 require __DIR__ . '/auth.php';

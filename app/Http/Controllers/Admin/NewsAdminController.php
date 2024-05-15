@@ -16,7 +16,7 @@ class NewsAdminController extends Controller
 
     public function index()
     {
-    $news=News::latest()->get();
+        $news = News::latest()->get();
 
         return view('admin.news.index', compact('news'));
     }
@@ -40,9 +40,13 @@ class NewsAdminController extends Controller
         $user = Auth::user();
 
         $md = new \ParsedownExtra();
+
+        $slug = $this->isLatin($request->title) ? Str::slug($request->title) : str_replace(' ', '-', $request->title);
+        $slug .= '-' . rand(1000, 9999);
+
         $news = $user->news()->create([
             'title' => $request->title,
-            'slug' => Str::slug($request->title) . '-' . rand(1000, 9999),
+            'slug' => $slug,
             'description' => $md->text($request->description),
             'location' => $request->location,
             'link' => $request->link,
@@ -51,18 +55,26 @@ class NewsAdminController extends Controller
             'is_published' => true,
         ]);
 
-        foreach (explode(',', $request->tags) as $requestTag) {
-            $tag = Tag::firstOrCreate([
-                'slug' => Str::slug(trim($requestTag))
-            ], [
-                'name' => ucwords(trim($requestTag))
-            ]);
 
+        foreach (explode(',', $request->tags) as $requestTag) {
+            $requestTag = trim($requestTag);
+            $slug = $this->isLatin($requestTag) ? Str::slug($requestTag) : str_replace(' ', '-', $requestTag);
+            $slug .= '-' . rand(1000, 9999);
+        
+            $tag = Tag::firstOrCreate([
+                'slug' => $slug
+            ], [
+                'name' => ucwords($requestTag)
+            ]);
+        
             $tag->news()->attach($news->id);
         }
+     
 
         return redirect()->route('dashboard');
     }
+
+
 
 
     public function edit(News $news)
@@ -82,13 +94,16 @@ class NewsAdminController extends Controller
             'location' => 'required',
             'link' => 'required|url',
             'description' => 'required',
-         
+
         ]);
-         // If the title has changed, update the slug as well
-    if ($request->has('title') && $request->title !== $news->title) {
-        $validatedData['slug'] = Str::slug($request->title) . '-' . rand(1000, 9999);
-    }
-    
+
+        // If the title has changed, update the slug as well
+        if ($request->has('title') && $request->title !== $news->title) {
+            $slug = $this->isLatin($request->title) ? Str::slug($request->title) : str_replace(' ', '-', $request->title);
+            $validatedData['slug'] = $slug . '-' . rand(1000, 9999);
+        }
+
+
         if ($request->hasFile('image')) {
             $validatedData['image'] = Storage::disk('public')->put('news', $request->file('image'));
         }
@@ -99,51 +114,62 @@ class NewsAdminController extends Controller
             $validatedData['is_highlighted'] = false;
         }
 
-        
+
         if ($request->has('is_published')) {
             $validatedData['is_published'] = $request->boolean('is_published');
         } else {
             $validatedData['is_published'] = false;
         }
-    
+
         $news->update($validatedData);
-    
+
+      
+     
         if ($request->has('tags')) {
-            $news->tags()->detach();
-    
-            foreach (explode(',', $request->tags) as $requestTag) {
+            $newTags = collect(explode(',', $request->tags))->map(function ($tag) {
+                return trim($tag);
+            });
+        
+            $tagIds = [];
+            foreach ($newTags as $requestTag) {
                 $tag = Tag::firstOrCreate([
-                    'slug' => Str::slug(trim($requestTag))
+                    'slug' => Str::slug($requestTag)
                 ], [
-                    'name' => ucwords(trim($requestTag))
-                    
+                    'name' => ucwords($requestTag)
                 ]);
-    
-                $tag->news()->attach($news->id);
+        
+                $tagIds[] = $tag->id;
             }
+        
+            $news->tags()->sync($tagIds);
         }
     
+        
+
         return redirect()->route('dashboard');
     }
 
 
 
-
+    private function isLatin($string)
+    {
+        return mb_detect_encoding($string, 'ASCII', true);
+    }
 
 
 
     public function destroy(News $news)
     {
-    
+
         // Delete the image from the storage
-    Storage::delete('public/news/' . $news->image);
+        Storage::delete('public/news/' . $news->image);
 
-      // Detach all related tags before deleting the news
-      $news->tags()->detach();
+        // Detach all related tags before deleting the news
+        $news->tags()->detach();
 
-    // Delete the news
-    $news->delete();
+        // Delete the news
+        $news->delete();
 
-    return redirect()->route('dashboard');
+        return redirect()->route('dashboard');
     }
 }

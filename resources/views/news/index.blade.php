@@ -25,9 +25,7 @@
                   </div>
                   <div class="md:w-1/2 mr-8 flex flex-col items-start justify-center">
                       <h2 class="text-xl font-bold text-gray-900 title-font mb-1">{{ $new->title }}</h2>
-                      <p class="leading-relaxed text-gray-900">
-                           &mdash; <span class="text-gray-600">{{ $new->location }}</span>
-                      </p>
+                     
                   </div>
                   <div class="md:flex-grow mr-8 flex items-center justify-start">
                       @foreach($new->tags as $tag)

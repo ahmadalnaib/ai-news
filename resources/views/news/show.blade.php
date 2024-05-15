@@ -7,7 +7,7 @@
                 </h2>
                 <div class="md:flex-grow mr-8 mt-2 flex items-center justify-end">
                     @foreach($news->tags as $tag)
-                        <span class="inline-block ml-2 tracking-wide text-indigo-500 text-xs font-medium title-font py-0.5 px-1.5 border border-indigo-500 uppercase">{{ $tag->name }}</span>
+                        <span class="inline-block ml-2 tracking-wide text-black text-xs font-medium title-font py-0.5 px-1.5 border border-black uppercase">{{ $tag->name }}</span>
                     @endforeach
                 </div>
             </div>
@@ -23,10 +23,9 @@
                             class="max-w-full mb-4"
                         >
                         <p class="leading-relaxed text-base text-right">
-                            <strong>الموقع: </strong>{{ $news->location }}<br>
-                            <strong>الشركة: </strong>{{ $news->company }}
+                          
                         </p>
-                        <a href="#" class="block text-center my-4 tracking-wide bg-white text-indigo-500 text-sm font-medium title-font py-2 border border-indigo-500 hover:bg-indigo-500 hover:text-white uppercase">تقدم الآن</a>
+                        <a target="__blank" href="{{$news->link}}" class="block text-center my-4 tracking-wide bg-white text-black text-sm font-medium title-font py-2 border border-black hover:bg-black hover:text-white uppercase">زيارة موقع الشركة </a>
                     </div>
                 </div>
             </div>

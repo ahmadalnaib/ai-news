@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug');
             $table->text('description');
-            $table->string('location');
             $table->string('image')->nullable();
             $table->boolean('is_highlighted')->default(false);
             $table->boolean('is_published')->default(false);

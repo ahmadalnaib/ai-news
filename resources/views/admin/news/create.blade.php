@@ -76,7 +76,7 @@
                   <textarea
                       id="content"
                       rows="8"
-                      class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full"
+                      class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full ckeditor"
                       name="description"
                   ></textarea>
               </div>

@@ -32,5 +32,8 @@
                 {{ $slot }}
             </main>
         </div>
+
+        
+      <script src="//cdn.ckeditor.com/4.14.1/full/ckeditor.js" charset="utf-8"></script>
     </body>
 </html>

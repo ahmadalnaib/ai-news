@@ -40,5 +40,8 @@
               </a>
           @endforeach
       </div>
-  </section>
+      <div class="mt-10">
+        {{ $news->links() }}
+    </div>
+    </section>
 </x-guest-layout>

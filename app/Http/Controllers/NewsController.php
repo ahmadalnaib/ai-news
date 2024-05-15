@@ -27,7 +27,7 @@ class NewsController extends Controller
                 $query->where(function (Builder $builder) use ($searchQuery) {
                     $builder
                         ->orWhere('title', 'like', "%{$searchQuery}%")
-                        ->orWhere('location', 'like', "%{$searchQuery}%");
+                        ->orWhere('description', 'like', "%{$searchQuery}%");
                 });
             }
     
@@ -38,10 +38,11 @@ class NewsController extends Controller
                 });
             }
     
-            $news = $query->get();
+            $news = $query->paginate(12);
     
-            $tags = Tag::orderBy('name')
-                ->get();
+            $tags = Tag::latest()
+            ->take(20)
+            ->get();
     
             return view('news.index', compact('news', 'tags'));
         }

@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-guest-layout>
   <section class="text-gray-600 body-font overflow-hidden">
       <div class="container px-5 py-24 mx-auto">
           <div class="mb-12">
@@ -26,10 +26,10 @@
                           <strong>Location: </strong>{{ $news->location }}<br>
                           <strong>Company: </strong>{{ $news->company }}
                       </p>
-                      <a href="" class="block text-center my-4 tracking-wide bg-white text-indigo-500 text-sm font-medium title-font py-2 border border-indigo-500 hover:bg-indigo-500 hover:text-white uppercase">Apply Now</a>
+                      <a href="#" class="block text-center my-4 tracking-wide bg-white text-indigo-500 text-sm font-medium title-font py-2 border border-indigo-500 hover:bg-indigo-500 hover:text-white uppercase">Apply Now</a>
                   </div>
               </div>
           </div>
       </div>
   </section>
-</x-app-layout>
+</x-guest-layout>

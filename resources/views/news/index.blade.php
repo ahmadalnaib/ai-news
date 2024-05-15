@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-guest-layout>
 
   <x-hero></x-hero>
   <section class="container px-5 py-12 mx-auto">
@@ -43,4 +43,4 @@
           @endforeach
       </div>
   </section>
-</x-app-layout>
+</x-guest-layout>

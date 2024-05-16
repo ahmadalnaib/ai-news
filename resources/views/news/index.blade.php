@@ -1,5 +1,20 @@
 <x-guest-layout>
 
+    @section('title',"تطوير العالم العربي من خلال الذكاء الاصطناعي")
+    @section('og-title',"تطوير العالم العربي من خلال الذكاء الاصطناعي")
+    @section('og-type', 'website')
+    @section('og-url', url()->current())
+    @section('og-image', url('favicon_io/android-chrome-192x192.png'))
+    @section('title', "تطوير العالم العربي من خلال الذكاء الاصطناعي")
+    @section('description', " مخصصة لتطوير العالم العربي من خلال الذكاء الاصطناعي. تقدم منصتنا مقالات مفيدة، وموارد تعليمية، وآخر التحديثات الإخبارية، ومقاطع فيديو مشوقة، ومجتمع تفاعلي، بهدف المساهمة بشكل معنوي في نمو وازدهار العالم العربي في مجال التكنولوجيا والابتكار.")
+    @section('keywords',"الذكاء الاصطناعي، التعليم، العالم العربي، تقنية، ابتكار")
+    @section('twitter:card', url('favicon_io/android-chrome-192x192.png'))
+    @section('twitter:site', '@Ahmad_Al_Naib')
+@section('twitter:title', "تطوير العالم العربي من خلال الذكاء الاصطناعي")
+@section('twitter:description', " مخصصة لتطوير العالم العربي من خلال الذكاء الاصطناعي. تقدم منصتنا مقالات مفيدة، وموارد تعليمية، وآخر التحديثات الإخبارية، ومقاطع فيديو مشوقة، ومجتمع تفاعلي، بهدف المساهمة بشكل معنوي في نمو وازدهار العالم العربي في مجال التكنولوجيا والابتكار.")
+@section('twitter:image', url('favicon_io/android-chrome-192x192.png'))
+    
+
   <x-hero></x-hero>
   <section class="container px-5 py-12 mx-auto">
       <div class="mb-12">

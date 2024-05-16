@@ -1,4 +1,24 @@
 <x-guest-layout>
+
+
+
+@section('title', $news->title)
+@section('og-title', $news->title)
+@section('og-type', 'article')
+@section('og-url', url()->current())
+@section('og-image','/storage/'. $news->image)
+@section('og-description',  $news->title)
+@section('description',  $news->title)
+@section('keywords', implode(', ', explode(' ', $news->title)))
+@section('twitter:card', url('/storage/'. $news->image))
+@section('twitter:site', '@Ahmad_Al_Naib')
+@section('twitter:title', $news->title)
+@section('twitter:description', $news->title)
+@section('twitter:image', url('/storage/'. $news->image))
+
+  
+
+
     <section class="text-gray-600 body-font overflow-hidden" dir="rtl">
         <div class="container px-5 py-24 mx-auto">
             <div class="mb-12 text-right">

@@ -6,14 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>جربوع |  تطوير العالم العربي</title>
-    <meta property="og:title" content="Jerboa.ai - تطوير العالم العربي من خلال الذكاء الاصطناعي" />
-    <meta property="og:description" content="Jerboa.ai هو منصة مخصصة لتطوير العالم العربي من خلال الذكاء الاصطناعي. نقدم مقالات مفيدة، وموارد تعليمية، وأحدث التحديثات الإخبارية، ومقاطع فيديو مثيرة، ومجتمع تفاعلي لتعزيز الوعي وتعميق المعرفة في هذا المجال المتطور." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.jerboa.ai" />
-    <meta property="og:image" content="{{ asset('favicon_io/android-chrome-512x512') }}" />
-    <meta name="description" content="Jerboa.ai مخصصة لتطوير العالم العربي من خلال الذكاء الاصطناعي. تقدم منصتنا مقالات مفيدة، وموارد تعليمية، وآخر التحديثات الإخبارية، ومقاطع فيديو مشوقة، ومجتمع تفاعلي، بهدف المساهمة بشكل معنوي في نمو وازدهار العالم العربي في مجال التكنولوجيا والابتكار." />
-    <meta name="keywords" content="الذكاء الاصطناعي، التعليم، العالم العربي، تقنية، ابتكار" />
+    <title>جربوع - @yield('title')</title>
+
+    
+    <meta property="og:title" content="@yield('og-title')" />
+    <meta property="og:description" content="@yield('og-description')">
+    <meta property="og:type" content="@yield('og-type')" />
+    <meta property="og:url" content="@yield('og-url')" />
+    <meta property="og:image" content="@yield('og-image')" />
+    <meta name="description" content="@yield('description')">
+    <meta name="keywords" content="@yield('keywords')">
+        
+    <meta property="og:title" content="@yield('og-title')" />
+    <meta property="og:description" content="@yield('og-description')">
+    <meta property="og:type" content="@yield('og-type')" />
+    <meta property="og:url" content="@yield('og-url')" />
+    <meta property="og:image" content="@yield('og-image')" />
+    <meta name="description" content="@yield('description')">
+    <meta name="keywords" content="@yield('keywords')">
+   
+   
+
     
 
     <link rel="apple-touch-icon" sizes="180x180" href="{{ url('favicon_io/apple-touch-icon.png') }}">

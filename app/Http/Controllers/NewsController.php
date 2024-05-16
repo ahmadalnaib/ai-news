@@ -15,9 +15,10 @@ class NewsController extends Controller
     public function index(Request $request)
     {
         $query = News::query()
-        ->where('is_published', true)
-        ->with('tags')
-        ->latest();
+    ->where('is_published', true)
+    ->with('tags')
+    ->orderBy('is_highlighted', 'desc') 
+    ->latest();
 
             $tags=Tag::orderBy('name')->get();
 

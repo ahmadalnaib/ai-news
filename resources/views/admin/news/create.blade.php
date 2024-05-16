@@ -45,15 +45,7 @@
                       type="file"
                       name="image" />
               </div>
-              <div class="mb-4 mx-2">
-                  <x-input-label for="location" value="الموقع (مثلاً، عن بعد، الولايات المتحدة)" />
-                  <x-text-input
-                      id="location"
-                      class="block mt-1 w-full"
-                      type="text"
-                      name="location"
-                      required />
-              </div>
+           
               <div class="mb-4 mx-2">
                   <x-input-label for="apply_link" value="رابط التقديم" />
                   <x-text-input

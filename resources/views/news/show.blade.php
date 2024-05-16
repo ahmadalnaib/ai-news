@@ -45,7 +45,7 @@
                         <p class="leading-relaxed text-base text-right">
                           
                         </p>
-                        <a target="__blank" href="{{$news->link}}" class="block text-center my-4 tracking-wide bg-white text-black text-sm font-medium title-font py-2 border border-black hover:bg-black hover:text-white uppercase">زيارة موقع الشركة </a>
+                        <a target="__blank" href="{{$news->link}}" class="block text-center my-4 tracking-wide bg-white text-black text-sm font-medium title-font py-2 border border-black hover:bg-black hover:text-white uppercase">المصدر</a>
                     </div>
                 </div>
             </div>

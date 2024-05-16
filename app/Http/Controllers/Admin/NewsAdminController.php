@@ -34,7 +34,7 @@ class NewsAdminController extends Controller
             'title' => 'required',
             'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-            'location' => 'required',
+        
             'link' => 'required|url',
         ]);
         $user = Auth::user();
@@ -47,8 +47,7 @@ class NewsAdminController extends Controller
         $news = $user->news()->create([
             'title' => $request->title,
             'slug' => $slug,
-            'description' => $md->text($request->description),
-            'location' => $request->location,
+            'description' => $request->description,
             'link' => $request->link,
             'image' => Storage::disk('public')->put('news', $request->file('image')),
             'is_highlighted' => $request->boolean('is_highlighted'),
@@ -91,7 +90,6 @@ class NewsAdminController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'image' => 'nullable|image',
-            'location' => 'required',
             'link' => 'required|url',
             'description' => 'required',
 

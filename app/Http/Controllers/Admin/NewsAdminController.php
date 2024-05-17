@@ -6,6 +6,8 @@ use App\Models\Tag;
 use App\Models\News;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use OpenAI\Laravel\Facades\OpenAI;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -170,4 +172,73 @@ class NewsAdminController extends Controller
 
         return redirect()->route('dashboard');
     }
+
+    public function createDailyArticle()
+    {
+        $today = Carbon::now()->format('Y-m-d');
+        $title = "Latest AI News for " . $today;
+        $content = $this->generateArticleContent();
+
+        $user = Auth::user();
+        $slug = $this->generateSlug($title);
+
+        $news = $user->news()->create([
+            'title' => $title,
+            'slug' => $slug,
+            'description' => $content,
+            'link' => 'https://example.com',  // يمكن تعديل هذا الرابط
+            'image' => 'default_image_path.jpg',  // يمكن إضافة منطق لتحميل صورة
+            'is_highlighted' => false,
+            'is_published' => true,
+        ]);
+
+        return "Article created and published for " . $today;
+    }
+
+    protected function generateArticleContent()
+    {
+        $systemMessage = 'Translate the following English text to Arabic:';
+        $text = 'Write an article about the latest news in AI.';
+    
+        $response = OpenAI::chat()->create([
+            'model' => 'gpt-4o',
+            'messages' => [
+                ['role' => 'system', 'content' => $systemMessage],
+                ['role' => 'user', 'content' => $text]
+            ],
+        ]);
+    
+        return $response['choices'][0]['message']['content'];
+    }
+    
+
+    private function generateSlug($title)
+    {
+        $slug = $this->isLatin($title) ? Str::slug($title) : str_replace(' ', '-', $title);
+        return $slug . '-' . rand(1000, 9999);
+    }
+
+    private function attachTags($news, $tagsString)
+    {
+        $tags = collect(explode(',', $tagsString))->map(function ($tag) {
+            return trim($tag);
+        });
+
+        $tagIds = [];
+        foreach ($tags as $requestTag) {
+            $tag = Tag::firstOrCreate([
+                'slug' => Str::slug($requestTag)
+            ], [
+                'name' => ucwords($requestTag)
+            ]);
+
+            $tagIds[] = $tag->id;
+        }
+
+        $news->tags()->sync($tagIds);
+    }
+
+
+
+    
 }

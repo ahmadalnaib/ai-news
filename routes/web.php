@@ -13,6 +13,8 @@ Route::get('/', [NewsController::class, 'index'])->name('news.index');
 
 
 
+Route::get('/test-article', 'App\Http\Controllers\Admin\NewsAdminController@createDailyArticle');
+
 
 
 Route::get('/dashboard', function () {
